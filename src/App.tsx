@@ -66,7 +66,12 @@ function App() {
 
   return (
     <main className="App">
-      <div className="outer">
+      <p>
+        This is my solution to the problem from{" "}
+        <a href="https://www.youtube.com/watch?v=B9fmr1TpKHE ">this</a> youtube
+        video{" "}
+      </p>
+      <div>
         <form className="horizontal" onSubmit={(e) => addNewShopper(e)}>
           <input ref={inputRef}></input>
           <br />
@@ -95,11 +100,6 @@ function App() {
             </button>
           </div>
         </div>
-        <p>
-          This is my solution to the problem from{" "}
-          <a href="https://www.youtube.com/watch?v=B9fmr1TpKHE ">this</a>{" "}
-          youtube video{" "}
-        </p>
       </div>
     </main>
   );
