@@ -6,6 +6,9 @@ function NavBar() {
     <div>
       <ul>
         <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
           <Link to="/CheckoutLines">Checkout Lines</Link>
         </li>
         <li>
