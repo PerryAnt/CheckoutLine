@@ -1,5 +1,5 @@
 import { FormEvent, useRef, useState, useEffect } from "react";
-import "./CheckoutLines.css";
+import "../css/CheckoutLines.css";
 
 export default function CheckoutLines() {
   const [lines, setLines] = useState<number[][]>(Array(5).fill([]));

@@ -1,6 +1,7 @@
 .nav ul{
     display: flex;
     list-style-type: none;
+    gap: 1rem;
 }
 
 .nav a {
