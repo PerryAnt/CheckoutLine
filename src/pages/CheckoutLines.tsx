@@ -69,7 +69,7 @@ export default function CheckoutLines() {
       <p>
         This is my solution to the problem from{" "}
         <a href="https://www.youtube.com/watch?v=B9fmr1TpKHE ">this</a> youtube
-        video{" "}
+        video
       </p>
       <div>
         <form className="horizontal" onSubmit={(e) => addNewShopper(e)}>

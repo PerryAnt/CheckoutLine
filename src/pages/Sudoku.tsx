@@ -147,7 +147,6 @@ export default function Sudoku() {
   return (
     <>
       <div>
-        <div>Sudoku</div>
         <table>
           {board.map((row, rowIndex) => (
             <tr key={rowIndex}>
@@ -169,6 +168,18 @@ export default function Sudoku() {
             </tr>
           ))}
         </table>
+        <p>
+          This project is partially motivated by{" "}
+          <a href="https://www.youtube.com/watch?v=dCCYALKSZEs">this</a> youtube
+          video, but it is also motivated by my love for Sudoku in general.
+        </p>
+        <p>
+          The puzzles are from{" "}
+          <a href="https://www.kaggle.com/datasets/bryanpark/sudoku">this</a>{" "}
+          kaggle dataset where someone generated a large number of Sudoku. I
+          took a small number of those puzzles and a random one is selected when
+          a new puzzle is needed.
+        </p>
       </div>
     </>
   );
