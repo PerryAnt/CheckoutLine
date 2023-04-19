@@ -2,7 +2,6 @@ import React from "react";
 import { FormEvent, useRef, useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import "../css/Sudoku.css";
-//import DATA from "../assets/data.csv";
 
 export default function Sudoku() {
   const [board, setBoard] = useState<number[][]>(
@@ -17,11 +16,41 @@ export default function Sudoku() {
       .map(() => Array(9).fill(false))
   );
 
+  const [startingBoard, setStartingBoard] = useState<number[][]>(
+    Array(9)
+      .fill(null)
+      .map(() => Array(9).fill(0))
+  );
+
+  //set starting board when page first loads
+  useEffect(() => {
+    getNewPuzzle();
+  }, []);
+
+  function getNewPuzzle() {
+    //data.csv is in a different relative location if running locally vs running on github
+    let csvLocation = window.location.href.includes("localhost")
+      ? "sudoku.csv"
+      : "https://perryant.github.io/CheckoutLine/sudoku.csv";
+    fetch(csvLocation)
+      .then((response) => response.text())
+      .then((data) => {
+        return getRandomPuzzleFromCSV(data);
+      })
+      .then((data) => {
+        //TO DO fix board and startingBoard being set to the same reference
+        setStartingBoard(data);
+        setBoard(data);
+      })
+      .catch((error) => console.log(error));
+  }
+
   function handleBoardChange(
     rowIndex: number,
     columnIndex: number,
     value: number
   ) {
+    if (startingBoard[rowIndex][columnIndex]) return;
     if (isNaN(value)) value = 0;
     if (value > 9) return;
 
@@ -99,12 +128,21 @@ export default function Sudoku() {
     setIncorrectCells(newIncorrectCells);
   }, [board]);
 
-  useEffect(() => {
-    fetch("./data.csv")
-      .then((response) => response.text())
-      .then((data) => console.log(data.split("\r\n")))
-      .catch((error) => console.log(error));
-  }, []);
+  //   useEffect(() => {
+  //     //data.csv is in a different relative location if running locally vs running on github
+  //     let csvLocation = window.location.href.includes("localhost")
+  //       ? "data.csv"
+  //       : "https://perryant.github.io/CheckoutLine/data.csv";
+  //     fetch(csvLocation)
+  //       .then((response) => response.text())
+  //       .then((data) => data.split(/\r?\n|\r|\n/))
+  //       .then((data) => {
+  //         if (data.at(-1) === "") data.pop();
+  //         return data;
+  //       })
+  //       .then((data) => console.log(data))
+  //       .catch((error) => console.log(error));
+  //   }, []);
 
   return (
     <>
@@ -134,6 +172,36 @@ export default function Sudoku() {
       </div>
     </>
   );
+}
+
+function getRandomPuzzleFromCSV(csvText: string) {
+  let newPuzzleString = csvText.split(/\r?\n|\r|\n/);
+  newPuzzleString =
+    newPuzzleString.at(-1) === ""
+      ? newPuzzleString.slice(1, -1)
+      : newPuzzleString.slice(1);
+  //text file has both puzzle and solution in the same row
+  //this gets just the puzzle
+  newPuzzleString = newPuzzleString.map((row) => {
+    return row.split(",")[0];
+  });
+  //get random puzzle
+  let puzzleIndex = Math.floor(Math.random() * newPuzzleString.length);
+
+  return convertStringTo2DArray(newPuzzleString[puzzleIndex]);
+}
+
+function convertStringTo2DArray(text: string) {
+  let arr = text.split("");
+  let arrNumber = arr.map((value) => {
+    return parseInt(value);
+  });
+  let arr2D: number[][] = [];
+
+  for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
+    arr2D.push(arrNumber.slice(9 * rowIndex, 9 * (rowIndex + 1)));
+  }
+  return arr2D;
 }
 
 interface Props {
