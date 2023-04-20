@@ -35,7 +35,7 @@ export default function Sudoku() {
     //data.csv is in a different relative location if running locally vs running on github
     let csvLocation = window.location.href.includes("localhost")
       ? "sudoku.csv"
-      : "https://perryant.github.io/CheckoutLine/sudoku.csv";
+      : "https://perryant.github.io/ReactStuff/sudoku.csv";
     fetch(csvLocation)
       .then((response) => response.text())
       .then((data) => {
