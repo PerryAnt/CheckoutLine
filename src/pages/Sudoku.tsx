@@ -25,6 +25,10 @@ export default function Sudoku() {
   //set starting board when page first loads
   useEffect(() => {
     getNewPuzzle();
+
+    fetch("sudoku.json")
+      .then((response) => response.json())
+      .then((response) => console.log(response));
   }, []);
 
   function getNewPuzzle() {
@@ -37,10 +41,10 @@ export default function Sudoku() {
       .then((data) => {
         return getRandomPuzzleFromCSV(data);
       })
-      .then((data) => {
+      .then((newStartingBoard) => {
         //TO DO fix board and startingBoard being set to the same reference
-        setStartingBoard(data);
-        setBoard(data);
+        setStartingBoard(newStartingBoard);
+        setBoard(newStartingBoard);
       })
       .catch((error) => console.log(error));
   }
@@ -64,10 +68,8 @@ export default function Sudoku() {
   }
 
   function resetBoard() {
-    setBoard(
-      Array(9)
-        .fill(null)
-        .map(() => Array(9).fill(false))
+    setBoard((prevBoard) =>
+      board.map((row, rowIndex) => [...startingBoard[rowIndex]])
     );
   }
 
@@ -79,6 +81,7 @@ export default function Sudoku() {
 
     for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
       for (let columnIndex = 0; columnIndex < 9; columnIndex++) {
+        //check row for duplicates
         for (let rowIndex2 = rowIndex + 1; rowIndex2 < 9; rowIndex2++) {
           if (
             board[rowIndex][columnIndex] > 0 &&
@@ -88,6 +91,7 @@ export default function Sudoku() {
             newIncorrectCells[rowIndex2][columnIndex] = true;
           }
 
+          //check column for duplicates
           for (
             let columnIndex2 = columnIndex + 1;
             columnIndex2 < 9;
@@ -103,6 +107,7 @@ export default function Sudoku() {
           }
         }
 
+        //check box for duplicates
         let rowBox = Math.floor(rowIndex / 3);
         let columnBox = Math.floor(columnIndex / 3);
         let rowIndex2 = 0;
@@ -148,30 +153,36 @@ export default function Sudoku() {
     <>
       <div>
         <table>
-          {board.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((number, columnIndex) => (
-                <Square
-                  number={number}
-                  wrong={incorrectCells[rowIndex][columnIndex]}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleBoardChange(
-                      rowIndex,
-                      columnIndex,
-                      parseInt(e.target.value)
-                    )
-                  }
-                  row={rowIndex}
-                  column={columnIndex}
-                ></Square>
-              ))}
-            </tr>
-          ))}
+          <tbody>
+            {board.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((number, columnIndex) => (
+                  <Square
+                    key={columnIndex}
+                    number={number}
+                    wrong={incorrectCells[rowIndex][columnIndex]}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      handleBoardChange(
+                        rowIndex,
+                        columnIndex,
+                        parseInt(e.target.value)
+                      )
+                    }
+                  ></Square>
+                ))}
+              </tr>
+            ))}
+          </tbody>
         </table>
+        <button onClick={getNewPuzzle}>New Puzzle</button>
+        <button onClick={resetBoard}>Reset Puzzle</button>
         <p>
           This project is partially motivated by{" "}
           <a href="https://www.youtube.com/watch?v=dCCYALKSZEs">this</a> youtube
-          video, but it is also motivated by my love for Sudoku in general.
+          video, the version in the video sends a partially complete Sudoku
+          board to an API which sends back the solution, then fills the board
+          with that solution. My version gets a random puzzle from a file and
+          the user is meant to try to solve it.
         </p>
         <p>
           The puzzles are from{" "}
@@ -202,6 +213,8 @@ function getRandomPuzzleFromCSV(csvText: string) {
   return convertStringTo2DArray(newPuzzleString[puzzleIndex]);
 }
 
+function getRandomPuzzleFromJSON(json: Object) {}
+
 function convertStringTo2DArray(text: string) {
   let arr = text.split("");
   let arrNumber = arr.map((value) => {
@@ -219,13 +232,11 @@ interface Props {
   number: number;
   wrong: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  row: number;
-  column: number;
 }
 
 function Square(props: Props) {
   return (
-    <td key={props.column}>
+    <td>
       <input
         className={props.wrong ? "wrong" : "input"}
         value={props.number > 0 ? props.number : ""}

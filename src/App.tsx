@@ -10,7 +10,7 @@ function App() {
       <NavBar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/ReactStuff" element={<Home />} />
           <Route path="/CheckoutLines" element={<CheckoutLines />} />
           <Route path="/Sudoku" element={<Sudoku />} />
         </Routes>
