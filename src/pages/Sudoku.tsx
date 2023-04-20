@@ -26,7 +26,7 @@ export default function Sudoku() {
   useEffect(() => {
     getNewPuzzle();
 
-    fetch("sudoku.json")
+    fetch("https://perryant.github.io/ReactStuff/sudoku.json")
       .then((response) => response.json())
       .then((response) => console.log(response));
   }, []);
