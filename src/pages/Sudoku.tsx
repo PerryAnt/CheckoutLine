@@ -28,7 +28,7 @@ export default function Sudoku() {
 
     fetch("https://perryant.github.io/ReactStuff/sudoku.json")
       .then((response) => response.json())
-      .then((response) => console.log(response));
+      .then((response) => console.log(response[0]));
   }, []);
 
   function getNewPuzzle() {
