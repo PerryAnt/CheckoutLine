@@ -1,5 +1,5 @@
 import React from "react";
-import { FormEvent, useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import "../css/Sudoku.css";
 
@@ -26,9 +26,9 @@ export default function Sudoku() {
   useEffect(() => {
     getNewPuzzle();
 
-    fetch("https://perryant.github.io/ReactStuff/sudoku.json")
-      .then((response) => response.json())
-      .then((response) => console.log(response.data));
+    // fetch("https://perryant.github.io/ReactStuff/sudoku.json")
+    //   .then((response) => response.json())
+    //   .then((response) => console.log(response.data));
   }, []);
 
   function getNewPuzzle() {
@@ -36,7 +36,7 @@ export default function Sudoku() {
     let csvLocation = window.location.href.includes("localhost")
       ? "sudoku.csv"
       : "https://perryant.github.io/ReactStuff/sudoku.csv";
-    fetch(csvLocation)
+    fetch("sudoku.csv")
       .then((response) => response.text())
       .then((data) => {
         return getRandomPuzzleFromCSV(data);
@@ -133,22 +133,6 @@ export default function Sudoku() {
     setIncorrectCells(newIncorrectCells);
   }, [board]);
 
-  //   useEffect(() => {
-  //     //data.csv is in a different relative location if running locally vs running on github
-  //     let csvLocation = window.location.href.includes("localhost")
-  //       ? "data.csv"
-  //       : "https://perryant.github.io/CheckoutLine/data.csv";
-  //     fetch(csvLocation)
-  //       .then((response) => response.text())
-  //       .then((data) => data.split(/\r?\n|\r|\n/))
-  //       .then((data) => {
-  //         if (data.at(-1) === "") data.pop();
-  //         return data;
-  //       })
-  //       .then((data) => console.log(data))
-  //       .catch((error) => console.log(error));
-  //   }, []);
-
   return (
     <>
       <div>
@@ -161,7 +145,7 @@ export default function Sudoku() {
                     key={columnIndex}
                     number={number}
                     wrong={incorrectCells[rowIndex][columnIndex]}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    onChange={(e) =>
                       handleBoardChange(
                         rowIndex,
                         columnIndex,

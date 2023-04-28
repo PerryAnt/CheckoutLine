@@ -12,7 +12,7 @@ input {
 }
 
 table {
-    margin:1em auto;
+    margin: 1em 0;
     gap: 0;
     border-spacing: 0;
 }

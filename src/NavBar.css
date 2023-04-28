@@ -1,9 +1,9 @@
-.nav ul{
+.nav {
     display: flex;
     list-style-type: none;
     gap: 1rem;
 }
 
-.nav a {
+.nav {
     text-decoration: none;
 }
