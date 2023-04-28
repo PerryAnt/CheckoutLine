@@ -33,10 +33,19 @@ export default function Sudoku() {
 
   function getNewPuzzle() {
     //sudoku.csv is in a different relative location if running locally vs running on github
+    let fileName = "/Sudoku/sudoku.csv";
+    if (window.location.href.includes("github"))
+      fileName = "/ReactStuff" + fileName;
+
+    fileName = window.location.origin + fileName;
+
     let csvLocation = window.location.href.includes("localhost")
-      ? "sudoku.csv"
-      : "ReactStuff/Sudoku/sudoku.csv";
-    fetch(csvLocation)
+      ? "http://localhost:5173/Sudoku/sudoku.csv"
+      : "https://perryant.github.io/ReactStuff/Sudoku/sudoku.csv";
+
+    console.log(fileName);
+
+    fetch(fileName)
       .then((response) => response.text())
       .then((data) => {
         return getRandomPuzzleFromCSV(data);
