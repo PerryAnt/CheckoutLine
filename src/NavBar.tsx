@@ -11,7 +11,7 @@ function NavBar() {
         <Link to="/Sudoku/">Sudoku</Link>
       </nav>
       <div className="container">
-        <Suspense>
+        <Suspense fallback={<h1>Loading</h1>}>
           <Outlet />
         </Suspense>
       </div>
