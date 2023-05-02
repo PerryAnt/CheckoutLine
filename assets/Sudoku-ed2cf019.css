@@ -1,1 +1,0 @@
-input{border:none;display:block;margin:0 auto;font-size:2rem;width:2rem;text-align:center}.wrong{background-color:red}table{margin:1em 0;gap:0;border-spacing:0}td{height:30px;width:30px;border:1px solid}td:first-child{border-left:solid}td:nth-child(3n){border-right:solid}tr:first-child td{border-top:solid}tr:nth-child(3n) td{border-bottom:solid}
