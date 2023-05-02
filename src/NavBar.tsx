@@ -7,6 +7,7 @@ function NavBar() {
     <>
       <nav className="nav">
         <Link to="/ReactStuff/">Home</Link>
+        <Link to="/Thesaurus/">Thesaurus</Link>
         <Link to="/CheckoutLines/">Checkout Lines</Link>
         <Link to="/Sudoku/">Sudoku</Link>
       </nav>

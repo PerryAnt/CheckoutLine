@@ -65,7 +65,7 @@ export default function CheckoutLines() {
   }
 
   return (
-    <main className="CheckoutLines">
+    <div>
       <p>
         This is my solution to the problem from{" "}
         <a href="https://www.youtube.com/watch?v=B9fmr1TpKHE ">this</a> youtube
@@ -101,6 +101,6 @@ export default function CheckoutLines() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

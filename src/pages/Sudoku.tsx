@@ -31,6 +31,24 @@ export default function Sudoku() {
     //   .then((response) => console.log(response.data));
   }, []);
 
+  function newPuzzlePrompt() {
+    const puzzleCorrect = incorrectCells
+      .map((row) => row.every((value) => !value))
+      .every((value) => value);
+
+    const puzzleFull = board
+      .map((row) => row.every((value) => value != 0))
+      .every((value) => value);
+
+    if (
+      (puzzleFull && puzzleCorrect) ||
+      confirm(
+        "You haven't finished the puzzle yet.\n Do you still want a new one?"
+      )
+    )
+      getNewPuzzle();
+  }
+
   function getNewPuzzle() {
     //sudoku.csv is in a different relative location if running locally vs running on github
     let filePath = window.location.origin;
@@ -165,7 +183,7 @@ export default function Sudoku() {
             ))}
           </tbody>
         </table>
-        <button onClick={getNewPuzzle}>New Puzzle</button>
+        <button onClick={newPuzzlePrompt}>New Puzzle</button>
         <button onClick={resetBoard}>Reset Puzzle</button>
         <p>
           This project is partially motivated by{" "}
