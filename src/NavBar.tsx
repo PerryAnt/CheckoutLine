@@ -10,6 +10,7 @@ function NavBar() {
         <Link to="/Thesaurus/">Thesaurus</Link>
         <Link to="/CheckoutLines/">Checkout Lines</Link>
         <Link to="/Sudoku/">Sudoku</Link>
+        <Link to="/Memory/">Memory</Link>
       </nav>
       <div className="container">
         <Suspense fallback={<h1>Loading</h1>}>

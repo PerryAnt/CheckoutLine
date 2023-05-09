@@ -6,6 +6,7 @@ const Home = lazy(() => import("./pages/Home"));
 const CheckoutLines = lazy(() => import("./pages/CheckoutLines"));
 const Sudoku = lazy(() => import("./pages/Sudoku"));
 const Thesaurus = lazy(() => import("./pages/Thesaurus"));
+const Memory = lazy(() => import("./pages/Memory"));
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<NavBar />}>
           <Route path="/ReactStuff/" element={<Home />} />
+          <Route path="/Thesaurus/" element={<Thesaurus />} />
           <Route path="/CheckoutLines/" element={<CheckoutLines />} />
           <Route path="/Sudoku/" element={<Sudoku />} />
-          <Route path="Thesaurus/" element={<Thesaurus />} />
+          <Route path="/Memory/" element={<Memory />} />
         </Route>
       </Routes>
     </>

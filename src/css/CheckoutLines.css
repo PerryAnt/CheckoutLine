@@ -9,16 +9,6 @@
     gap: 10px
 }
 
-.vertical{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.horizontal{
-    display:flex;
-}
-
 .square {
     border: 1px solid;
     border-radius: 10px;

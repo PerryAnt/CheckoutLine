@@ -11,6 +11,13 @@ export default function Thesaurus() {
   const [antonyms, setAntonymsUrl] = useAPIParse();
 
   useEffect(() => {
+    fetch("https://api.datamuse.com/words?max=10&rel_syn=fast")
+      .then((res) => res.json())
+      .then(console.log)
+      .catch((err) => console.log(err));
+  });
+
+  useEffect(() => {
     setSynonymsUrl(
       "https://api.datamuse.com/words?max=10&rel_syn=" + searchWord
     );
@@ -18,39 +25,6 @@ export default function Thesaurus() {
       "https://api.datamuse.com/words?max=10&rel_ant=" + searchWord
     );
   }, [searchWord]);
-
-  //   useEffect(() => {
-  //     if (data) setSynonyms(data.map((value: apiResponse) => value.word));
-  //   }, [data]);
-
-  //   useEffect(() => {
-  //     const controller = new AbortController();
-  //     const signal = controller.signal;
-
-  //     fetch("https://api.datamuse.com/words?max=10&ml=" + searchWord, {
-  //       signal: signal,
-  //     })
-  //       .then((response) => response.json())
-  //       .then((response) => response.map((value: apiResponse) => value.word))
-  //       .then((response) => {
-  //         setSynonyms(response);
-  //       })
-  //       .catch((err) => console.log(signal.aborted));
-
-  //     fetch("https://api.datamuse.com/words?max=10&rel_ant=" + word, {
-  //       signal: signal,
-  //     })
-  //       .then((response) => response.json())
-  //       .then((response) => response.map((value: apiResponse) => value.word))
-  //       .then((response) => {
-  //         setAntonyms(response);
-  //       })
-  //       .catch((err) => console.log(signal.aborted));
-
-  //     return () => {
-  //       controller.abort();
-  //     };
-  //   }, [searchWord]);
 
   return (
     <div>
