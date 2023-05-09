@@ -20,7 +20,7 @@ export default function Memory() {
     newBoard = newBoard.map(
       (value, index) => (index % ((size * size) / 2)) + 1
     );
-    debugger;
+    console.log(newBoard);
     let j = 0;
 
     for (let i = newBoard.length - 1; i > 0; i--) {
