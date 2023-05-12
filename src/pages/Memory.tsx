@@ -2,24 +2,28 @@ import React, { useEffect, useState } from "react";
 import "../css/Memory.css";
 
 export default function Memory() {
-  const [size, setSize] = useState(4);
+  //const [size, setSize] = useState(4);
+
+  const [boardWidth, setBoardWidth] = useState(6);
+  const [boardHeight, setBoardHeight] = useState(4);
+
   const [board, setBoard] = useState<number[][]>(
-    Array(size)
+    Array(boardHeight)
       .fill(null)
-      .map(() => Array(size).fill(0))
+      .map(() => Array(boardWidth).fill(0))
   );
 
   const [state, setState] = useState<("up" | "down" | "empty")[][]>(
-    Array(size)
+    Array(boardHeight)
       .fill(null)
-      .map(() => Array<"up" | "down" | "empty">(size).fill("down"))
+      .map(() => Array<"up" | "down" | "empty">(boardWidth).fill("down"))
   );
 
   function getNewBoard() {
-    let newBoard = Array(size * size).fill(0);
+    let newBoard = Array(boardWidth * boardHeight).fill(0);
 
     newBoard = newBoard.map(
-      (value, index) => (index % ((size * size) / 2)) + 1
+      (value, index) => (index % ((boardWidth * boardHeight) / 2)) + 1
     );
 
     let j = 0;
@@ -29,11 +33,11 @@ export default function Memory() {
       swap(newBoard, i, j);
     }
 
-    setBoard(array1Dto2D(newBoard));
+    setBoard(array1Dto2D(newBoard, boardHeight, boardWidth));
     setState(
-      Array(size)
+      Array(boardHeight)
         .fill(null)
-        .map(() => Array<"up" | "down" | "empty">(size).fill("down"))
+        .map(() => Array<"up" | "down" | "empty">(boardWidth).fill("down"))
     );
   }
 
@@ -106,19 +110,28 @@ export default function Memory() {
           ))}
         </div>
       ))}
+      <label htmlFor="difficulty">Choose a difficulty:</label>
+      <select
+        name="difficulty"
+        id="difficulty"
+        onChange={(e) => setBoardWidth(parseInt(e.target.value))}
+      >
+        <option value="4">Easy</option>
+        <option value="5">Medium</option>
+        <option value="6">Hard</option>
+      </select>{" "}
       <button onClick={getNewBoard}>New Game</button>
     </div>
   );
 }
 
-function array1Dto2D(arr: number[]) {
-  let size = Math.sqrt(arr.length);
-  let newArr = Array(size)
+function array1Dto2D(arr: number[], height: number, width: number) {
+  let newArr = Array(height)
     .fill(null)
-    .map(() => Array(size).fill(0));
+    .map(() => Array(width).fill(0));
 
   return newArr.map((row, rowIndex) =>
-    row.map((value, colIndex) => arr[size * rowIndex + colIndex])
+    row.map((value, colIndex) => arr[width * rowIndex + colIndex])
   );
 }
 
