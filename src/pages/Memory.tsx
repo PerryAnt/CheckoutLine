@@ -4,7 +4,7 @@ import "../css/Memory.css";
 export default function Memory() {
   //const [size, setSize] = useState(4);
 
-  const [boardWidth, setBoardWidth] = useState(6);
+  const [boardWidth, setBoardWidth] = useState(4);
   const [boardHeight, setBoardHeight] = useState(4);
 
   const [board, setBoard] = useState<number[][]>(
