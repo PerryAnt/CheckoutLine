@@ -1,0 +1,1 @@
+.square-up,.square-down{border:1px solid black;width:3rem;height:3rem;margin:1rem;display:flex;justify-content:center;align-items:center}.square-down div{display:none}.square-empty{border:1px solid white;width:3rem;height:3rem;margin:1rem;justify-content:center;align-items:center}.square-empty div{display:none}
