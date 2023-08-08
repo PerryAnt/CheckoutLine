@@ -1,0 +1,1 @@
+.nav{display:flex;list-style-type:none;gap:1rem}.nav a{text-decoration:none}.container{margin:0 25vw;display:flex;place-items:center;min-height:50vh}.vertical{display:flex;flex-direction:column;gap:10px}.horizontal{display:flex}.color-box{height:400px;width:600px}.button-box{display:flex;justify-content:space-around;margin:10px}
