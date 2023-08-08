@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
-import { Link, Outlet } from "react-router-dom";
-import "./NavBar.css";
+import React, { Suspense } from "react"
+import { Link, Outlet } from "react-router-dom"
+import "./NavBar.css"
 
 function NavBar() {
   return (
@@ -11,6 +11,7 @@ function NavBar() {
         <Link to="/CheckoutLines/">Checkout Lines</Link>
         <Link to="/Sudoku/">Sudoku</Link>
         <Link to="/Memory/">Memory</Link>
+        <Link to="/ColorGuesser/">ColorGuesser</Link>
       </nav>
       <div className="container">
         <Suspense fallback={<h1>Loading</h1>}>
@@ -18,7 +19,7 @@ function NavBar() {
         </Suspense>
       </div>
     </>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar

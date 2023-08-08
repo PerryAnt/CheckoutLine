@@ -14,3 +14,14 @@
 .horizontal {
     display:flex;
 }
+
+.color-box {
+    height: 400px;
+    width: 600px;
+}
+
+.button-box {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px
+}
